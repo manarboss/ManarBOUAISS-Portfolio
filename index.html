@@ -1,0 +1,1337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Robotics Engineer Portfolio</title>
+    <style>
+        :root {
+            --primary: #00d9ff;
+            --primary-dark: #00a6cc;
+            --secondary: #ff2e63;
+            --dark-bg: #0a0a0f;
+            --dark-surface: #161625;
+            --dark-card: #1e1e2e;
+            --dark-text: #e2e2e2;
+            --dark-text-secondary: #a0a0a0;
+            --light-bg: #f8f9fa;
+            --light-surface: #ffffff;
+            --light-card: #f1f3f4;
+            --light-text: #212529;
+            --light-text-secondary: #6c757d;
+            --transition: all 0.3s ease;
+            --border-radius: 8px;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .light-mode {
+            --bg-color: var(--light-bg);
+            --surface-color: var(--light-surface);
+            --card-color: var(--light-card);
+            --text-color: var(--light-text);
+            --text-secondary: var(--light-text-secondary);
+        }
+
+        .dark-mode {
+            --bg-color: var(--dark-bg);
+            --surface-color: var(--dark-surface);
+            --card-color: var(--dark-card);
+            --text-color: var(--dark-text);
+            --text-secondary: var(--dark-text-secondary);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            transition: var(--transition);
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        h1, h2, h3, h4 {
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 700;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        h2:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        a:hover {
+            color: var(--primary-dark);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+            color: white;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Header & Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: rgba(10, 10, 15, 0.8);
+            backdrop-filter: blur(10px);
+            transition: var(--transition);
+        }
+
+        .light-mode header {
+            background-color: rgba(248, 249, 250, 0.8);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            font-weight: 500;
+            position: relative;
+        }
+
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover:after {
+            width: 100%;
+        }
+
+        .controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: var(--transition);
+            padding: 5px;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .theme-toggle:hover {
+            background-color: var(--card-color);
+        }
+
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            padding-top: 80px; /* Offset for fixed header */
+        }
+
+        .hero-content {
+            max-width: 600px;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary) 0%, #00a6cc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: var(--text-secondary);
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 15px;
+            margin-top: 2rem;
+        }
+
+        /* 3D Robot Arm Container */
+        .robot-arm-container {
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 60%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none; /* Allows clicks to pass through to content behind it */
+        }
+
+        /* About Section - MODIFIED TO REMOVE HEADSHOT CONTAINER */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr; /* Simplifies layout since image is removed */
+            gap: 50px;
+            align-items: center;
+        }
+        
+        .about-text {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .about-text p {
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .about-text .hero-btns {
+            justify-content: center;
+        }
+        /* END MODIFICATION */
+
+        /* Experience & Education */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline:before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background: var(--primary);
+        }
+
+        .timeline-item {
+            display: flex;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .timeline-item:nth-child(odd) {
+            justify-content: flex-start;
+            padding-right: 50px;
+        }
+
+        .timeline-item:nth-child(even) {
+            justify-content: flex-end;
+            padding-left: 50px;
+        }
+
+        .timeline-content {
+            background: var(--card-color);
+            padding: 25px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            width: 100%;
+            max-width: 550px;
+            position: relative;
+        }
+
+        .timeline-content:after {
+            content: '';
+            position: absolute;
+            top: 20px;
+            width: 20px;
+            height: 20px;
+            background: var(--card-color);
+            transform: rotate(45deg);
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content:after {
+            right: -10px;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content:after {
+            left: -10px;
+        }
+
+        .timeline-date {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-bottom: 10px;
+        }
+
+        .timeline-content h3 {
+            margin-bottom: 5px;
+        }
+
+        .timeline-content h4 {
+            color: var(--text-secondary);
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+        
+        /* Skills */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .skill-category {
+            background: var(--card-color);
+            padding: 25px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+
+        .skill-category h3 {
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .skill-tag {
+            background: var(--surface-color);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .skill-tag:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Projects - MODIFIED GRID TO ACCOMMODATE 5 ITEMS (using a fixed grid for larger screens) */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr); /* 5 columns on large screens (Original request) */
+            gap: 20px;
+            margin-top: 15px;
+        }
+
+        .project-card {
+            background: var(--card-color);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 150px; /* Adjusted height for 5-in-a-row layout */
+            background: var(--surface-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: var(--border-radius) var(--border-radius) 0 0;
+        }
+
+        .project-content {
+            padding: 15px; /* Adjusted padding */
+        }
+
+        .project-content h3 {
+            margin-bottom: 8px; /* Adjusted margin */
+            font-size: 1.1rem; /* Adjusted font size */
+        }
+
+        .project-content p {
+            font-size: 0.85rem; /* Adjusted font size */
+            margin-bottom: 10px;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin: 10px 0 0 0; /* Adjusted margin */
+        }
+
+        .project-tag {
+            background: var(--surface-color);
+            padding: 4px 8px; /* Adjusted padding */
+            border-radius: 12px; /* Adjusted border radius */
+            font-size: 0.75rem; /* Adjusted font size */
+        }
+        /* END PROJECT MODIFICATION */
+
+
+        /* Certifications */
+        .certifications-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .cert-card {
+            background: var(--card-color);
+            padding: 25px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .cert-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .cert-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        /* Leadership */
+        .leadership-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .leadership-card {
+            background: var(--card-color);
+            padding: 25px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+
+        .leadership-card h3 {
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        /* Contact */
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .contact-form {
+            background: var(--card-color);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            background: var(--surface-color);
+            border: 1px solid var(--text-secondary);
+            border-radius: var(--border-radius);
+            color: var(--text-color);
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--surface-color);
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: var(--card-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design - MODIFIED PROJECT GRID */
+        @media (max-width: 1400px) {
+            .projects-grid {
+                grid-template-columns: repeat(4, 1fr); /* 4 columns on large screens */
+            }
+        }
+
+        @media (max-width: 1200px) {
+            .hero-content {
+                max-width: 50%;
+            }
+            .robot-arm-container {
+                width: 50%;
+            }
+            .projects-grid {
+                grid-template-columns: repeat(3, 1fr); /* 3 columns on medium screens */
+            }
+        }
+
+        @media (max-width: 992px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                justify-content: center;
+                padding-top: 120px;
+            }
+            .hero-content {
+                max-width: 100%;
+            }
+            .hero-btns {
+                justify-content: center;
+            }
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+            .robot-arm-container {
+                position: relative;
+                width: 100%;
+                height: 400px;
+                margin-top: 40px;
+            }
+            .projects-grid {
+                grid-template-columns: repeat(2, 1fr); /* 2 columns on tablets */
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--dark-surface);
+                flex-direction: column;
+                padding: 20px;
+                /* Light mode adjustment for mobile menu */
+                background: var(--surface-color);
+                box-shadow: var(--shadow);
+            }
+            .light-mode .nav-links {
+                 background: var(--light-surface);
+            }
+            .nav-links.active {
+                display: flex;
+            }
+            .nav-links li {
+                margin: 10px 0;
+                text-align: center;
+            }
+            .mobile-menu {
+                display: block;
+            }
+            .timeline:before {
+                left: 20px;
+            }
+            .timeline-item {
+                justify-content: flex-start !important;
+                padding-left: 50px !important;
+                padding-right: 0 !important;
+            }
+            .timeline-content {
+                max-width: 100%; /* Use full width on small screens */
+            }
+            .timeline-content:after {
+                left: 10px !important;
+                right: auto !important;
+            }
+            h1 {
+                font-size: 2.5rem;
+            }
+            h2 {
+                font-size: 2rem;
+            }
+            .hero-btns {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .projects-grid, .certifications-grid, .leadership-grid {
+                grid-template-columns: 1fr; /* 1 column on phones */
+            }
+            .skills-container {
+                grid-template-columns: 1fr;
+            }
+            section {
+                padding: 60px 0;
+            }
+        }
+    </style>
+</head>
+<body class="dark-mode">
+    <header>
+        <div class="container nav-container">
+            <a href="#" class="logo">Robotics Engineer</a>
+            
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#about">About</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#certifications">Certifications</a></li>
+                <li><a href="#leadership">Leadership</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            
+            <div class="controls">
+                <button class="theme-toggle" id="themeToggle">🌙</button>
+                <button class="mobile-menu" id="mobileMenu">☰</button>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Manar BOUAISS - Robotics Engineer</h1>
+                <p>Passionate about creating innovative technologies and solving complex problems through robotics, AI, and automation.</p>
+                <div class="hero-btns">
+                    <a href="#contact" class="btn">Get In Touch</a>
+                    <a href="#" class="btn btn-outline" id="resumeDownload">Download Resume</a>
+                </div>
+            </div>
+        </div>
+        <div class="robot-arm-container">
+            <iframe
+                title="Optimus Gen Tesla Robot Advanced by MGD"
+                frameborder="0"
+                allowfullscreen
+                mozallowfullscreen="true"
+                webkitallowfullscreen="true"
+                allow="autoplay; fullscreen; xr-spatial-tracking"
+                xr-spatial-tracking
+                execution-while-out-of-viewport
+                execution-while-not-rendered
+                web-share
+                src="https://sketchfab.com/models/21059cdbddda430cb6d03a0e0e58d859/embed?autostart=1&transparent=1&ui_infos=0&ui_inspector=0&ui_annotations=0&ui_settings=0&ui_ar=0&ui_help=0&ui_vr=0&ui_watermark=0"
+                style="width: 100%; height: 100%; border: none; pointer-events: none;"
+            ></iframe>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="container">
+            <h2>About Me</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>I am Master 2 Student in Mecatronics, Computer Vision and AI.</p>
+                
+                    <p>With experience in mechatronics, control systems, computer vision, and AI, I'm passionate about pushing the boundaries of what's possible in robotics and automation.</p>
+                    <div class="hero-btns">
+                        <a href="#contact" class="btn">Let's Work Together</a>
+                        <a href="https://linkedin.com" class="btn btn-outline">LinkedIn</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience" style="background: var(--surface-color);">
+        <div class="container">
+            <h2>Professional Experience</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <span class="timeline-date">02/2025 – 09/2025</span>
+                        <h3>Electronics Engineer</h3>
+                        <h4>Research Centre In Industrial Technologies - CRTI</h4>
+                        <ul>
+                            <li>Collected and analyzed sensor and telemetry data to optimize performance and energy efficiency of an electric vehicle system prototype.</li>
+                            <li>Collaborated with multidisciplinary teams to integrate embedded systems and support hardware-software interfacing.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <span class="timeline-date">08/2023 – Present</span>
+                        <h3>Freelance Software Engineer</h3>
+                        <h4>IoT and Automation</h4>
+                        <ul>
+                            <li>Developed an AI-powered virtual assistant integrated into the company's internal software to automate workflows and respond to customer queries in real time.</li>
+                            <li>Designed custom software for remote monitoring and automation, including a logistics-oriented irrigation system.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <span class="timeline-date">02/2023 – 07/2023</span>
+                        <h3>R&D Intern - Robotics Division</h3>
+                        <h4>Center for Development of Advanced Technologies</h4>
+                        <ul>
+                            <li>Developed an autonomous surveillance robot; contributed to motor control and sensor fusion, and system analysis.</li>
+                            <li>Implemented control systems using ROS and C++, and interfaced various electronic components.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="education">
+        <div class="container">
+            <h2>Education</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <span class="timeline-date">09/2025 – 09/2026</span>
+                        <h3>M2 Mechatronics, Machine Vision and AI</h3>
+                        <h4>University of Evry Paris-Saclay, France</h4>
+                        <p>Relevant Coursework: Advances in mechatronic systems, Modeling of parallel manipulators, Strategy Business Development, Adaptive Assistance and Control, Instrumentation electronics, Machine learning.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <span class="timeline-date">09/2021 – 06/2023</span>
+                        <h3>Control and Automation Engineering</h3>
+                        <h4>Institute of Electrical and Electronic Engineering, Algeria</h4>
+                        <p>Grade: 13.61 / 20 | Ranking: Top 10%</p>
+                        <p>Relevant Coursework: Industrial Automation, Industrial Instrumentation, Non-linear Systems, Control Systems, Advanced Mathematics, Digital Controller Implementations, Data Structures and Algorithms, Signal Processing</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <span class="timeline-date">09/2018 – 06/2021</span>
+                        <h3>Electrical and Electronic Engineering</h3>
+                        <h4>Institute of Electrical and Electronic Engineering, Algeria</h4>
+                        <p>Grade: 13.91 / 20 | Ranking: Top 10%</p>
+                        <p>Relevant Coursework: Electronic Circuit Design, Electrical Machines, Power Electronics, Energy Systems, Microprocessor System Design, Active Devices, Digital Systems, Communication Circuits</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" style="background: var(--surface-color);">
+        <div class="container">
+            <h2>Technical Skills</h2>
+            <div class="skills-container">
+                <div class="skill-category">
+                    <h3>Programming</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">C/C++</span>
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">MATLAB</span>
+                        <span class="skill-tag">Shell/Bash</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>Software Tools</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Git</span>
+                        <span class="skill-tag">Docker</span>
+                        <span class="skill-tag">Linux</span>
+                        <span class="skill-tag">AWS</span>
+                        <span class="skill-tag">ROS</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>Control Systems</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">PLC Programming</span>
+                        <span class="skill-tag">DCS</span>
+                        <span class="skill-tag">Motor Control</span>
+                        <span class="skill-tag">Stability Analysis</span>
+                        <span class="skill-tag">PID Tuning</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>3D Modeling</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Blender</span>
+                        <span class="skill-tag">SolidWorks</span>
+                        <span class="skill-tag">AutoCAD</span>
+                        <span class="skill-tag">Fusion 360</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>Hardware Tools</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Nvidia Jetson Nano</span>
+                        <span class="skill-tag">FPGA</span>
+                        <span class="skill-tag">Raspberry Pi</span>
+                        <span class="skill-tag">Arduino</span>
+                        <span class="skill-tag">STM32</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>AI/ML</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">TensorFlow</span>
+                        <span class="skill-tag">PyTorch</span>
+                        <span class="skill-tag">OpenCV</span>
+                        <span class="skill-tag">Computer Vision</span>
+                        <span class="skill-tag">Data Science</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+ <section id="projects">
+ <h2>Projects</h2>
+  <div class="projects-grid">
+                
+    <!-- Project 1 -->
+    <div class="project-card">
+        <div class="project-image">
+            <img src="11.jpg" alt="Autonomous Sorting Robot">
+        </div>
+        <div class="project-content">
+            <h3>Robotics Teleoperation System</h3>
+            <p>Developed a real-time teleoperation system using OpenPose to capture user motion and stream joint data to CoppeliaSim, enabling a simulated robotic arm to mirror human movements through Inverse Kinematics (IK) mapping.The system also integrates a voice command interface to execute high-level control functions on the robot.</p> <div class="project-tags">
+                <span class="project-tag">ROS</span>
+                <span class="project-tag">Computer Vision</span>
+                <span class="project-tag">Python</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Project 2 -->
+    <div class="project-card">
+        <div class="project-image">
+            <img src="22.jpg" alt="Indoor Navigation System">
+        </div>
+        <div class="project-content">
+            <h3>Indoor Navigation System</h3>
+            <p> Developed a mobile robot platform featuring integrated SLAM navigation for localization and mapping in a dynamic environment. The system utilizes AI perception for environmental anomaly detection and executes real-time autonomous decision-making for mission control and event response.</p>
+            <div class="project-tags">
+                <span class="project-tag">C++</span>
+                <span class="project-tag">SLAM</span>
+                <span class="project-tag">ROS</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Project 3 -->
+    <div class="project-card">
+        <div class="project-image">
+            <img src="3.jpg" alt="Advanced Motor Control">
+        </div>
+        <div class="project-content">
+            <h3>Robust Control for UAVs using SMC</h3>
+            <p>Simulated a control architecture for Unmanned Aerial Vehicles with Sliding Mode Controllers (SMC) to guarantee stability and trajectory tracking under model uncertainties, wind disturbances, and parameter variations.
+            <div class="project-tags">
+                <span class="project-tag">MATLAB</span>
+                <span class="project-tag">Simulink</span>
+                <span class="project-tag">Control Systems</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Project 4 -->
+    <div class="project-card">
+        <div class="project-image">
+            <img src="44.png" alt="AI-based Predictive Maintenance System">
+        </div>
+        <div class="project-content">
+            <h3>AI-based Predictive Maintenance System</h3>
+            <p>Built a complete predictive maintenance pipeline using historical sensor data and operational logs for feature engineering, model training, and dashboard integration. Achieved over 90% accuracy in classifying potential equipment failures, enabling early intervention and reduced downtime.</p>
+            <div class="project-tags">
+                <span class="project-tag">Machine Learning</span>
+                <span class="project-tag">Pandas</span>
+                <span class="project-tag">Scikit-learn</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Project 5 -->
+    <div class="project-card">
+        <div class="project-image">
+            <img src="5.jpg" alt="Real-Time Safety Compliance System">
+        </div>
+        <div class="project-content">
+            <h3>Real-Time Safety Compliance System for Oil & Gas Fields</h3>
+            <p>Implemented and tested a real-time Personal Protective Equipment (PPE) detection system deployed in an active oil and gas field.</p>
+            <div class="project-tags">
+                <span class="project-tag">Python</span>
+                <span class="project-tag">YOLOv8</span>
+                <span class="project-tag">Computer Vision</span>
+            </div>
+        </div>
+    </div>
+
+ </div>
+
+</section>
+
+
+<!-- This is a comment 
+    <section id="projects1">
+        <div class="container">
+            <h2>Selected Projects 💡</h2>
+            <div class="projects-grid">
+                
+                <div class="project-card">
+                    <div class="project-image"></div>
+                    <div class="project-content">
+                        <h3>Autonomous Sorting Robot</h3>
+                        <p>Implemented an industrial robot for object recognition and high-speed sorting using a camera system.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">ROS</span>
+                            <span class="project-tag">Computer Vision</span>
+                            <span class="project-tag">Python</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image"></div>
+                    <div class="project-content">
+                        <h3>Indoor Navigation System</h3>
+                        <p>Developed SLAM and path planning algorithms for a mobile platform in an unstructured environment.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">C++</span>
+                            <span class="project-tag">SLAM</span>
+                            <span class="project-tag">ROS</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-image">
+
+[Image of a control panel schematic]
+</div>
+                    <div class="project-content">
+                        <h3>Advanced Motor Control</h3>
+                        <p>Designed and tuned a highly efficient field-oriented control (FOC) system for a brushless DC motor.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">STM32</span>
+                            <span class="project-tag">Control Theory</span>
+                            <span class="project-tag">C</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-image">
+
+[Image of a circuit board and wires]
+</div>
+                    <div class="project-content">
+                        <h3>FPGA-based Digital Controller</h3>
+                        <p>Implemented a digital PID controller on an FPGA for high-speed, real-time temperature regulation.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">FPGA</span>
+                            <span class="project-tag">VHDL</span>
+                            <span class="project-tag">Digital Control</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image"></div>
+                    <div class="project-content">
+                        <h3>Real-Time Safety Compliance System for Oil & Gas Fields</h3>
+                        <p>Implemented and tested a real-time Personal Protective Equipment (PPE) detection system deployed in an active oil and gas field.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">Python</span>
+                            <span class="project-tag">YOLOv8</span>
+                            <span class="project-tag">Computer Vision</span>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section> -->
+
+    <section id="certifications" style="background: var(--surface-color);">
+        <div class="container">
+            <h2>Certifications & Courses 🎓</h2>
+            <div class="leadership-grid">
+                <div class="leadership-card">
+                    <h3>Robotics in Space</h3>
+                </div>
+                <div class="leadership-card">
+                    <h3>Additive Manufacturing</h3>
+                </div>
+                <div class="leadership-card">
+                    <h3>Mechanical Engineering Summer University (AAF)</h3>
+                </div>
+                <div class="leadership-card">
+                    <h3>Computational Neuroscience</h3>
+                </div>
+                <div class="leadership-card">
+                    <h3>C++ for Robotics</h3>
+                </div>
+                <div class="leadership-card">
+                    <h3>Python for Data Science and AI Development</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="leadership">
+        <div class="container">
+            <h2>Leadership & Awards 🏆</h2>
+            <div class="leadership-grid">
+                
+                <div class="leadership-card">
+                    <h3>IEEE Student Branch of Boumerdes — General Secretary</h3>
+                    <p>09/2021 – 12/2022</p>
+                    <ul>
+                        <li>Organized meetings and coordinated branch-wide technical, academic, and community events.</li>
+                        <li>Supported planning, logistics, and communication across student teams.</li>
+                    </ul>
+                </div>
+                
+                <div class="leadership-card">
+                    <h3>Entrepreneurship Competition – 9th YEC, Algeria — 1st Prize Winner</h3>
+                    <ul>
+                        <li>Led a team to first place with an innovative robotics startup concept focused on automation and social impact.</li>
+                    </ul>
+                </div>
+                
+                <div class="leadership-card">
+                    <h3>Net Zero Ideathon, Algeria — 1st Prize Winner</h3>
+                    <ul>
+                        <li>Proposed a sustainable solution integrating sea plants into the production chain to significantly reduce $\text{CO}_2$ emissions; awarded 1st place.</li>
+                    </ul>
+                </div>
+
+                <div class="leadership-card">
+                    <h3>SOLVEX – Water Optimization Challenge — 1st Prize Winner</h3>
+                    <ul>
+                        <li>Developed an innovative monitoring system to reduce water usage in agriculture, winning 1st prize in the national competition.</li>
+                    </ul>
+                </div>
+
+                <div class="leadership-card">
+                    <h3>AI Hack – Computer Vision Hackathon, Tunisia — 4th Place</h3>
+                    <ul>
+                        <li>Developed a real-time computer vision solution for industrial automation, placing 4th internationally.</li>
+                    </ul>
+                </div>
+                
+                <div class="leadership-card">
+                    <h3>International Youth Math Challenge (IYMC) — Bronze Honour</h3>
+                    <ul>
+                        <li>Awarded Bronze Honour in a global mathematics competition among thousands of participants.</li>
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+    
+    <section id="contact" style="background: var(--surface-color);">
+        <div class="container">
+            <h2>Contact Me</h2>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <p>Feel free to reach out with any opportunities or collaboration ideas!</p>
+                    <div class="contact-item">
+                        <span class="contact-icon">📍</span>
+                        <div>
+                            <h4>Location</h4>
+                            <p>Paris, France</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-icon">📧</span>
+                        <div>
+                            <h4>Email</h4>
+                            <p><a href="mailto:manarbouaiss@gmail.com">manarbouaiss@gmail.com</a></p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-icon">📞</span>
+                        <div>
+                            <h4>Phone</h4>
+                            <p>+33 780730192</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <h3>Send a Message</h3>
+                    <form action="#" method="POST">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" class="form-control" required></textarea>
+                        </div>
+                        <button type="submit" class="btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container footer-content">
+            <div class="social-links">
+                <a href="#" class="social-link">in</a> <a href="#" class="social-link">Gh</a> <a href="#" class="social-link">𝕏</a> </div>
+            <p class="copyright">&copy; Manar. BOUAISS</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const body = document.body;
+            const themeToggle = document.getElementById('themeToggle');
+            const mobileMenuButton = document.getElementById('mobileMenu');
+            const navLinks = document.getElementById('navLinks');
+            
+            // Theme Toggle Logic
+            themeToggle.addEventListener('click', () => {
+                if (body.classList.contains('dark-mode')) {
+                    body.classList.replace('dark-mode', 'light-mode');
+                    themeToggle.textContent = '☀️';
+                } else {
+                    body.classList.replace('light-mode', 'dark-mode');
+                    themeToggle.textContent = '🌙';
+                }
+            });
+
+            // Mobile Menu Toggle Logic
+            mobileMenuButton.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+            });
+            
+            // Close mobile menu when a link is clicked
+            navLinks.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                });
+            });
+            
+            // Scroll fade effect for header (optional, commented out)
+            /*
+            window.addEventListener('scroll', () => {
+                const header = document.querySelector('header');
+                if (window.scrollY > 50) {
+                    header.style.backgroundColor = 'rgba(10, 10, 15, 0.95)'; 
+                } else {
+                    header.style.backgroundColor = 'rgba(10, 10, 15, 0.8)';
+                }
+            });
+            */
+            
+            // Dummy Resume Download
+            document.getElementById('resumeDownload').addEventListener('click', (e) => {
+                e.preventDefault();
+                alert('https://drive.google.com/uc?export=download&id=1vuffrLe4ao9zaZ_EHM8-VgNn8ZHj06xF/view?usp=sharing');
+            });
+        });
+    </script>
+</body>
+</html>
